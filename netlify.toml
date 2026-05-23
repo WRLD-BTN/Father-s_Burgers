@@ -1,0 +1,33 @@
+# Netlify Configuration
+# Auto-deploys from GitHub repo
+
+[build]
+  publish = "."
+  command = "# Static site - no build needed"
+
+# Redirects for SPA (if needed later)
+[[redirects]]
+  from = "/pages/*"
+  to = "/pages/:splat"
+  status = 200
+
+# Cache headers
+[[headers]]
+  for = "/**"
+  [headers.values]
+    Cache-Control = "max-age=3600"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "max-age=31536000"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "max-age=31536000"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "max-age=31536000"

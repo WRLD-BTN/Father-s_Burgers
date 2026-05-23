@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Father's Burgers</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #F5F5F5;
+    }
+
+    .admin-header {
+      background: linear-gradient(135deg, #E63946 0%, #F77F00 100%);
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .admin-header-right {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .user-info {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .admin-container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 80px);
+    }
+
+    .admin-sidebar {
+      background: white;
+      border-right: 2px solid #E63946;
+      padding: 2rem 0;
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 80px);
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      display: block;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.95rem;
+      color: #666;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: #F5F5F5;
+      color: #E63946;
+    }
+
+    .nav-item.active {
+      background: #FFE5E5;
+      color: #E63946;
+      border-left-color: #E63946;
+      font-weight: 600;
+    }
+
+    .admin-content {
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #E63946;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #E63946;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #E63946;
+    }
+
+    .stat-subtitle {
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 0.5rem;
+    }
+
+    .form-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: #1A1A1A;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.8rem;
+      border: 1px solid #EEEEEE;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #E63946;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #D62828;
+    }
+
+    .btn-secondary {
+      background: #F77F00;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #E67E00;
+    }
+
+    .btn-danger {
+      background: #D62828;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #B81F1F;
+    }
+
+    .btn-small {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .data-table {
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .table-header {
+      background: #F5F5F5;
+      border-bottom: 2px solid #E63946;
+    }
+
+    .table-header tr {
+      display: grid;
+      gap: 1rem;
+      padding: 1rem;
+      font-weight: 600;
+      color: #1A1A1A;
+    }
+
+    .table-body tr {
+      display: grid;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid #EEEEEE;
+    }
+
+    .table-body tr:hover {
+      background: #FAFAFA;
+    }
+
+    .menu-item-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      border-left: 4px solid #E63946;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+
+    .menu-item-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #1A1A1A;
+    }
+
+    .menu-item-icon {
+      font-size: 2rem;
+    }
+
+    .menu-item-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .detail-item {
+      font-size: 0.9rem;
+    }
+
+    .detail-label {
+      color: #666;
+      font-weight: 600;
+    }
+
+    .detail-value {
+      color: #E63946;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #E63946;
+      padding-bottom: 1rem;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .alert {
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .alert.success {
+      background: #E5F9F4;
+      color: #06A77D;
+      border-left: 4px solid #06A77D;
+      display: block;
+    }
+
+    .alert.error {
+      background: #FFE5E5;
+      color: #E63946;
+      border-left: 4px solid #E63946;
+      display: block;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-primary {
+      background: #E63946;
+      color: white;
+    }
+
+    .badge-secondary {
+      background: #F77F00;
+      color: white;
+    }
+
+    .badge-success {
+      background: #06A77D;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .admin-container {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-sidebar {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 80px;
+        width: 250px;
+        z-index: 200;
+        height: auto;
+        max-height: calc(100vh - 80px);
+      }
+
+      .admin-sidebar.active {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .admin-content {
+        padding: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Admin Header -->
+  <div class="admin-header">
+    <h1>🔐 Admin Dashboard</h1>
+    <div class="admin-header-right">
+      <div class="user-info">
+        👤 Administrator
+      </div>
+      <button class="logout-btn" onclick="adminLogout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Admin Container -->
+  <div class="admin-container">
+    <!-- Sidebar Navigation -->
+    <div class="admin-sidebar" id="adminSidebar">
+      <button class="nav-item active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+      <button class="nav-item" onclick="switchTab('menu')">🍔 Menu Management</button>
+      <button class="nav-item" onclick="switchTab('sales')">💰 Daily Sales</button>
+      <button class="nav-item" onclick="switchTab('expenses')">💳 Expenses</button>
+      <button class="nav-item" onclick="switchTab('inventory')">📦 Inventory</button>
+      <button class="nav-item" onclick="switchTab('reports')">📈 Reports</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+
+      <!-- Dashboard Tab -->
+      <div id="dashboard" class="tab-content active">
+        <div class="section-title">📊 Dashboard Overview</div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Today's Sales</div>
+            <div class="stat-value" id="todaySales">$0.00</div>
+            <div class="stat-subtitle" id="todayOrders">0 orders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Today's Expenses</div>
+            <div class="stat-value" id="todayExpenses">$0.00</div>
+            <div class="stat-subtitle" id="todayExpenseCount">0 expenses</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Today's Profit</div>
+            <div class="stat-value" id="todayProfit">$0.00</div>
+            <div class="stat-subtitle">After expenses</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Weekly Sales</div>
+            <div class="stat-value" id="weeklySales">$0.00</div>
+            <div class="stat-subtitle" id="weeklyOrders">0 orders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Weekly Profit</div>
+            <div class="stat-value" id="weeklyProfit">$0.00</div>
+            <div class="stat-subtitle">After expenses</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Monthly Sales</div>
+            <div class="stat-value" id="monthlySales">$0.00</div>
+            <div class="stat-subtitle" id="monthlyOrders">0 orders</div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Quick Actions</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+            <button class="btn btn-primary" onclick="switchTab('sales')">➕ Record Sale</button>
+            <button class="btn btn-secondary" onclick="switchTab('expenses')">➕ Add Expense</button>
+            <button class="btn btn-secondary" onclick="switchTab('menu')">✏️ Edit Menu</button>
+            <button class="btn btn-secondary" onclick="exportSalesData()">📥 Export Sales</button>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Best Sellers</h3>
+          <div id="bestSellers"></div>
+        </div>
+      </div>
+
+      <!-- Menu Management Tab -->
+      <div id="menu" class="tab-content">
+        <div class="section-title">🍔 Menu Management</div>
+
+        <div class="form-card">
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Add New Menu Item</h3>
+          <form id="addMenuForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Category</label>
+                <select id="newCategory" required>
+                  <option value="">Select Category...</option>
+                  <option value="Burgers">Burgers</option>
+                  <option value="Sides">Sides</option>
+                  <option value="Drinks">Drinks</option>
+                  <option value="Combos">Combos</option>
+                  <option value="Specials">Specials (New)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Item Name</label>
+                <input type="text" id="newItemName" placeholder="e.g., Spicy Burger" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Price ($)</label>
+                <input type="number" id="newItemPrice" placeholder="5.99" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label>Icon/Emoji (fallback)</label>
+                <input type="text" id="newItemIcon" placeholder="🍔" value="🍔">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Image (optional)</label>
+                <input type="file" id="newItemImage" accept="image/*">
+                <small style="color:#666;">You can drag & drop images onto menu item cards to update images after creation.</small>
+                <div id="newItemImagePreviewWrapper" class="image-preview-container hidden">
+                  <label for="newItemImagePreview" style="font-size:0.85rem;color:#333;display:block;margin-bottom:0.5rem;">Selected image preview</label>
+                  <img id="newItemImagePreview" alt="Selected item preview" class="image-preview">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" id="newItemDesc" placeholder="Short description" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">➕ Add Item</button>
+          </form>
+        </div>
+
+        <h3 style="color: #E63946; margin-bottom: 1rem;">Current Menu</h3>
+        <div id="menuItemsList"></div>
+      </div>
+
+      <!-- Daily Sales Tab -->
+      <div id="sales" class="tab-content">
+        <div class="section-title">💰 Daily Sales</div>
+
+        <div class="form-card">
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Record Sale</h3>
+          <form id="recordSaleForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Sale Amount ($)</label>
+                <input type="number" id="saleAmount" placeholder="50.00" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label>Payment Method</label>
+                <select id="paymentMethod">
+                  <option value="whatsapp">WhatsApp</option>
+                  <option value="cash">Cash</option>
+                  <option value="mobile_money">Mobile Money</option>
+                  <option value="card">Card</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Items Sold (Optional)</label>
+                <input type="text" id="itemsSold" placeholder="e.g., 2x Burger, 1x Fries">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">💾 Record Sale</button>
+          </form>
+        </div>
+
+        <div id="salesAlert" class="alert"></div>
+
+        <h3 style="color: #E63946; margin-bottom: 1rem;">Today's Sales</h3>
+        <div class="data-table">
+          <div class="table-header">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr; gap: 1rem;">
+              <div>Time</div>
+              <div>Amount</div>
+              <div>Payment</div>
+              <div>Items</div>
+              <div>Total Today</div>
+              <div>Action</div>
+            </div>
+          </div>
+          <div id="salesList" class="table-body"></div>
+        </div>
+      </div>
+
+      <!-- Expenses Tab -->
+      <div id="expenses" class="tab-content">
+        <div class="section-title">💳 Expenses Tracking</div>
+
+        <div class="form-card">
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Add Expense</h3>
+          <form id="addExpenseForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Category</label>
+                <select id="expenseCategory" required>
+                  <option value="">Select Category...</option>
+                  <option value="Ingredients">Ingredients/Food</option>
+                  <option value="Supplies">Supplies</option>
+                  <option value="Rent">Rent/Lease</option>
+                  <option value="Utilities">Utilities</option>
+                  <option value="Wages">Wages/Staff</option>
+                  <option value="Maintenance">Maintenance</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Amount ($)</label>
+                <input type="number" id="expenseAmount" placeholder="25.50" step="0.01" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" id="expenseDesc" placeholder="e.g., Beef patty stock">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">💾 Add Expense</button>
+          </form>
+        </div>
+
+        <div id="expenseAlert" class="alert"></div>
+
+        <h3 style="color: #E63946; margin-bottom: 1rem;">Today's Expenses</h3>
+        <div class="data-table">
+          <div class="table-header">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 2fr 0.5fr; gap: 1rem;">
+              <div>Time</div>
+              <div>Category</div>
+              <div>Amount</div>
+              <div>Description</div>
+              <div>Action</div>
+            </div>
+          </div>
+          <div id="expensesList" class="table-body"></div>
+        </div>
+      </div>
+
+      <!-- Inventory Tab -->
+      <div id="inventory" class="tab-content">
+        <div class="section-title">📦 Inventory Management</div>
+
+        <div class="form-card">
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Update Stock Level</h3>
+          <form id="updateInventoryForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Item</label>
+                <select id="inventoryItem" required>
+                  <option value="">Select Item...</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" id="inventoryQty" placeholder="100" min="0" required>
+              </div>
+              <div class="form-group">
+                <label>Unit</label>
+                <select id="inventoryUnit">
+                  <option value="pcs">Pieces</option>
+                  <option value="kg">Kg</option>
+                  <option value="liter">Liter</option>
+                  <option value="box">Box</option>
+                  <option value="case">Case</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">💾 Update Stock</button>
+          </form>
+        </div>
+
+        <h3 style="color: #E63946; margin-bottom: 1rem;">Current Inventory</h3>
+        <div id="inventoryList" class="data-table"></div>
+      </div>
+
+      <!-- Reports Tab -->
+      <div id="reports" class="tab-content">
+        <div class="section-title">📈 Financial Reports</div>
+
+        <div class="form-card">
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Export Data</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+            <button class="btn btn-secondary" onclick="downloadCSV('sales')">📥 Sales CSV</button>
+            <button class="btn btn-secondary" onclick="downloadCSV('expenses')">📥 Expenses CSV</button>
+            <button class="btn btn-secondary" onclick="clearAllData()">🗑️ Clear Data</button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <div class="form-card">
+            <h3 style="color: #E63946; margin-bottom: 1rem;">Today's Summary</h3>
+            <div id="todaySummary"></div>
+          </div>
+
+          <div class="form-card">
+            <h3 style="color: #E63946; margin-bottom: 1rem;">Weekly Summary</h3>
+            <div id="weeklySummary"></div>
+          </div>
+
+          <div class="form-card">
+            <h3 style="color: #E63946; margin-bottom: 1rem;">Monthly Summary</h3>
+            <div id="monthlySummary"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/sales.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>

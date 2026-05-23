@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Father's Burgers</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="../images/logo.png" alt="FATHER'S BURGERS">
+        <span>FATHER'S BURGERS</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html#menu">Menu</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin-login.html" style="color: #F77F00; font-weight: 600;">🔐 Admin</a></li>
+      </ul>
+      <button class="nav-cta" onclick="window.location.href='../index.html'">Back to Menu</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" style="padding: 3rem 2rem;">
+    <div class="hero-content">
+      <h1>Get in Touch</h1>
+      <p>Questions? Suggestions? We'd love to hear from you!</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h2 style="color: #E63946; margin-bottom: 2rem;">Contact Information</h2>
+
+          <div class="info-item">
+            <div class="info-icon">📱</div>
+            <div class="info-content">
+              <h4>WhatsApp (Fastest)</h4>
+              <p>
+                <a href="https://wa.me/263716512214?text=Hi%20Father's%20Burgers!" style="color: #E63946; text-decoration: none; font-weight: 600;">
+                  +263 77 1234 567
+                </a>
+              </p>
+              <p style="font-size: 0.9rem; color: #999; margin-top: 0.5rem;">Message us anytime for orders or inquiries</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">☎️</div>
+            <div class="info-content">
+              <h4>Phone</h4>
+              <p>+263 77 1234 567</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div class="info-content">
+              <h4>Email</h4>
+              <p>order@fathersburgers.co.zw</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div class="info-content">
+              <h4>Address</h4>
+              <p>123 Main Street<br>Harare, Zimbabwe</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">🕐</div>
+            <div class="info-content">
+              <h4>Hours</h4>
+              <p>Mon-Fri: 11am - 10pm<br>
+                 Sat: 12pm - 11pm<br>
+                 Sun: 12pm - 9pm
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+          <h2 style="color: #E63946; margin-bottom: 2rem;">Send us a Message</h2>
+
+          <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" name="subject" placeholder="e.g., Menu Feedback, Catering Inquiry" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Actions -->
+  <section class="section" style="background: #F5F5F5;">
+    <div class="container">
+      <h2 class="section-title">Quick Actions</h2>
+      <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+        <div style="background: white; padding: 2rem; border-radius: 8px; text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🍔</div>
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Order Now</h3>
+          <p style="color: #666; margin-bottom: 1.5rem;">Ready to order? Go back to our menu and send your order via WhatsApp.</p>
+          <a href="../index.html#menu" style="background: #E63946; color: white; padding: 0.8rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; display: inline-block;">View Menu</a>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 8px; text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Catering</h3>
+          <p style="color: #666; margin-bottom: 1.5rem;">Need burgers for your event? Contact us for catering packages and bulk orders.</p>
+          <a href="https://wa.me/263716512214?text=Hi!%20I'm%20interested%20in%20catering%20services." style="background: #E63946; color: white; padding: 0.8rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; display: inline-block;">WhatsApp Us</a>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 8px; text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">💼</div>
+          <h3 style="color: #E63946; margin-bottom: 1rem;">Business Inquiry</h3>
+          <p style="color: #666; margin-bottom: 1.5rem;">Want to partner with Father's Burgers? Let's talk business!</p>
+          <a href="mailto:order@fathersburgers.co.zw?subject=Business%20Inquiry" style="background: #E63946; color: white; padding: 0.8rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; display: inline-block;">Email Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Father's Burgers. All rights reserved.</p>
+    <p style="font-size: 0.9rem; margin-top: 1rem;">🇿🇼 Harare, Zimbabwe | Fresh burgers delivered fast!</p>
+  </footer>
+
+  <!-- Note: Update Formspree ID in form action above -->
+  <script>
+    // Auto-close success message after form submission
+    document.querySelector('.contact-form')?.addEventListener('submit', function() {
+      setTimeout(() => {
+        alert('Thank you! We\'ll get back to you soon.');
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

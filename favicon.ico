@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Father's Burgers favicon</title>
+  <desc id="desc">A compact burger-themed mark matching the brand logo.</desc>
+  <rect width="512" height="512" rx="96" fill="#b86a10"/>
+  <path d="M124 178h264c0 52-59 94-132 94s-132-42-132-94z" fill="#f2c07b" stroke="#2d1a12" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M140 228h232c10 0 18 8 18 18s-8 18-18 18H140c-10 0-18-8-18-18s8-18 18-18z" fill="#69b34c" stroke="#2d1a12" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M130 278h252c0 48-57 86-126 86s-126-38-126-86z" fill="#7b3f19" stroke="#2d1a12" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M162 124c18-18 43-28 94-28s76 10 94 28c8 8 12 18 12 30v30H150v-30c0-12 4-22 12-30z" fill="#ffffff" stroke="#2d1a12" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M180 150h152" stroke="#ef476f" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="256" cy="180" r="8" fill="#2d1a12"/>
+  <path d="M226 330c10 10 22 14 30 14s20-4 30-14" fill="none" stroke="#2d1a12" stroke-width="10" stroke-linecap="round"/>
+</svg>

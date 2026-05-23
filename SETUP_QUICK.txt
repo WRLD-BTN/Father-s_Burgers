@@ -1,0 +1,58 @@
+// QUICK SETUP CHECKLIST - Edit these THREE files to go live!
+
+// ============================================
+// FILE 1: js/config.js
+// ============================================
+// Update THESE values:
+
+CONFIG = {
+  restaurant: {
+    whatsappNumber: "CHANGE_ME",        // Your WhatsApp: 263771234567 (no +)
+    email: "CHANGE_ME",                  // Your email
+    phone: "CHANGE_ME",                  // Your phone with country code
+    address: "CHANGE_ME",                // Your address
+    hours: "CHANGE_ME"                   // Your hours
+  },
+  menu: {
+    // Add/remove categories and items as needed
+    // Easy to update!
+  }
+};
+
+// ============================================
+// FILE 2: pages/contact.html
+// ============================================
+// Find this line and update:
+
+<form action="https://formspree.io/f/CHANGE_ME" method="POST">
+  // Get YOUR_FORM_ID from https://formspree.io
+
+// ============================================
+// FILE 3: images/logo.png
+// ============================================
+// Place your logo image here
+// Size: 50x50px recommended
+// Format: PNG, JPG, or SVG
+
+// ============================================
+// BONUS: Customize Colors
+// ============================================
+// In css/styles.css, find :root and change:
+
+:root {
+  --primary-red: #E63946;       // Main color
+  --secondary-orange: #F77F00;  // Accent color
+  --accent-dark: #D62828;       // Dark variant
+  --bg-white: #FFFFFF;
+  --text-dark: #1A1A1A;
+}
+
+// ============================================
+// READY TO DEPLOY?
+// ============================================
+// 1. Update the 3 files above
+// 2. Deploy to Netlify (see DEPLOYMENT.md)
+// 3. Test WhatsApp link
+// 4. Start taking orders!
+
+// Questions? See README.md or DEPLOYMENT.md

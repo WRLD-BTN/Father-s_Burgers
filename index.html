@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Father's Burgers - Order Online</title>
+  <meta name="description" content="Fresh burgers, fries, and drinks. Order online via WhatsApp for fast delivery.">
+  <link rel="preload" as="image" href="images/mainscreen.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <div class="logo">
+        <picture>
+          <source srcset="images/logo.png" type="image/png">
+          <img src="images/logo.png" alt="FATHER'S BURGERS" class="brand-logo">
+        </picture>
+        <span>FATHER'S BURGERS</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="pages/contact.html">Contact</a></li>
+        <li><a href="pages/admin-login.html" style="color: #F77F00; font-weight: 600;">🔐 Admin</a></li>
+      </ul>
+      <button class="nav-cta" id="navCartBtn">Order (0)</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="images/mainscreen.png" alt="Father's Burgers hero" class="hero-bg-img" loading="eager" width="1600" height="900">
+    <div class="hero-content">
+      <h1>🍔 Fresh, Tasty Burgers</h1>
+      <p>Your favorite burgers, delivered fresh to your door</p>
+      <button class="hero-cta" onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})">
+        Order Now
+      </button>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="section">
+    <div class="container">
+      <h2 class="section-title">Our Menu</h2>
+
+      <!-- Category Filter -->
+      <div class="menu-categories" id="menuCategories"></div>
+
+      <!-- Menu Items Grid -->
+      <div class="menu-grid" id="menuGrid"></div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary">
+        <div class="cart-items-count" id="cartItemsCount">Items in cart: 0</div>
+        <div class="cart-total" id="cartTotal">$0.00</div>
+        <button class="order-btn" id="orderBtn">
+          📱 Send Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section" style="background: #F5F5F5;">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <div class="about-grid">
+        <div class="about-img">🍔</div>
+        <div class="about-text">
+          <h3>Why Choose Father's Burgers?</h3>
+          <p>
+            We believe in quality. Every burger is made fresh with the finest ingredients, 
+            grilled to perfection, and served with love.
+          </p>
+          <p>
+            ✅ Fresh ingredients daily<br>
+            ✅ Quick delivery<br>
+            ✅ Affordable prices<br>
+            ✅ Family-friendly
+          </p>
+          <p>
+            Father's Burgers started as a small dream to bring delicious, affordable meals 
+            to our community. Today, we're proud to serve hundreds of satisfied customers!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Opening Hours -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Hours & Location</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-item">
+            <div class="info-icon">🕐</div>
+            <div class="info-content">
+              <h4>Opening Hours</h4>
+              <p>Mon-Fri: 11am - 10pm<br>Sat: 12pm - 11pm<br>Sun: 12pm - 9pm</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div class="info-content">
+              <h4>Location</h4>
+              <p>123 Main Street<br>Harare, Zimbabwe</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📱</div>
+            <div class="info-content">
+              <h4>WhatsApp Order</h4>
+              <p><a href="https://wa.me/263716512214" style="color: #E63946; text-decoration: none; font-weight: 600;">+263 71 651 2214</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- Map placeholder -->
+        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #E63946 0%, #F77F00 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+          📍 Map would go here
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Father's Burgers. All rights reserved. | Order via WhatsApp for fastest service.</p>
+    <p style="font-size: 0.9rem; margin-top: 1rem;">🇿🇼 Harare, Zimbabwe | Fresh burgers delivered fast!</p>
+  </footer>
+
+  <!-- Load Scripts (order matters) -->
+  <div id="menuImageLightbox" class="image-lightbox" aria-hidden="true">
+    <div class="image-lightbox__backdrop"></div>
+    <div class="image-lightbox__content">
+      <button class="image-lightbox__close" type="button" aria-label="Close image preview">×</button>
+      <img id="menuImageLightboxImg" alt="" />
+      <div class="image-lightbox__hint">Tap outside or press × to close</div>
+    </div>
+  </div>
+  <script src="js/config.js"></script>
+  <script src="js/sales.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

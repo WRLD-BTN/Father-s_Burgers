@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Father's Burgers</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-content {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .lightbox-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -30px;
+      right: 0;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-nav button {
+      background: rgba(255, 255, 255, 0.3);
+      color: white;
+      border: none;
+      padding: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .lightbox-nav button:hover {
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="../images/logo.png" alt="FATHER'S BURGERS">
+        <span>FATHER'S BURGERS</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html#menu">Menu</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin-login.html" style="color: #F77F00; font-weight: 600;">🔐 Admin</a></li>
+      </ul>
+      <button class="nav-cta" onclick="window.location.href='../index.html'">Back to Menu</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" style="padding: 3rem 2rem;">
+    <div class="hero-content">
+      <h1>Our Gallery</h1>
+      <p>Check out our delicious creations!</p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Food Gallery</h2>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+      <div class="lightbox-nav">
+        <button onclick="prevImage()">❮</button>
+        <button onclick="nextImage()">❯</button>
+      </div>
+      <div style="text-align: center; margin-top: 2rem;">
+        <div class="gallery-item" id="lightboxImg" style="width: 100%; margin: 0;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Father's Burgers. All rights reserved.</p>
+    <p style="font-size: 0.9rem; margin-top: 1rem;">🇿🇼 Harare, Zimbabwe | Fresh burgers delivered fast!</p>
+  </footer>
+
+  <script>
+    // Gallery data - easily scalable
+    const galleryItems = [
+      { name: "Classic Burger", icon: "🍔" },
+      { name: "Cheese Burger", icon: "🧀" },
+      { name: "Bacon Burger", icon: "🥓" },
+      { name: "Spicy Burger", icon: "🌶️" },
+      { name: "Double Deluxe", icon: "🍔" },
+      { name: "French Fries", icon: "🍟" },
+      { name: "Onion Rings", icon: "🧅" },
+      { name: "Chicken Wings", icon: "🍗" },
+    ];
+
+    let currentImageIndex = 0;
+
+    // Render gallery
+    function renderGallery() {
+      const grid = document.getElementById("galleryGrid");
+      grid.innerHTML = galleryItems.map((item, idx) => `
+        <div class="gallery-item" onclick="openLightbox(${idx})">
+          ${item.icon}
+        </div>
+      `).join("");
+    }
+
+    // Lightbox functions
+    function openLightbox(index) {
+      currentImageIndex = index;
+      updateLightbox();
+      document.getElementById("lightbox").classList.add("active");
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.remove("active");
+    }
+
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+      updateLightbox();
+    }
+
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      const item = galleryItems[currentImageIndex];
+      document.getElementById("lightboxImg").textContent = item.icon;
+    }
+
+    // Close lightbox with Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    });
+
+    // Initialize
+    renderGallery();
+  </script>
+</body>
+</html>

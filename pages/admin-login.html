@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Father's Burgers</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .admin-login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #E63946 0%, #F77F00 100%);
+    }
+
+    .login-box {
+      background: white;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-box h1 {
+      color: #E63946;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+
+    .login-box .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      color: #1A1A1A;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.9rem;
+      border: 2px solid #EEEEEE;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #E63946;
+    }
+
+    .login-btn {
+      background: #E63946;
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background: #D62828;
+    }
+
+    .login-btn:disabled {
+      background: #CCC;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      color: #E63946;
+      text-align: center;
+      margin-bottom: 1rem;
+      display: none;
+      padding: 0.8rem;
+      background: #FFE5E5;
+      border-radius: 4px;
+    }
+
+    .success-message {
+      color: #06A77D;
+      text-align: center;
+      margin-bottom: 1rem;
+      display: none;
+      padding: 0.8rem;
+      background: #E5F9F4;
+      border-radius: 4px;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .back-link a {
+      color: #E63946;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        padding: 2rem;
+      }
+
+      .login-box h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-login-container">
+    <div class="login-box">
+      <h1>🔐 Admin Panel</h1>
+      <p class="subtitle">Father's Burgers Management</p>
+
+      <div class="error-message" id="errorMsg"></div>
+      <div class="success-message" id="successMsg"></div>
+
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="password">Admin Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Enter admin password"
+            required
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button type="submit" class="login-btn">Login to Dashboard</button>
+      </form>
+
+      <div class="back-link">
+        <a href="../index.html">← Back to Menu</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    // Admin login handler
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      
+      const password = document.getElementById("password").value;
+      const errorMsg = document.getElementById("errorMsg");
+      const successMsg = document.getElementById("successMsg");
+
+      errorMsg.style.display = "none";
+      successMsg.style.display = "none";
+
+      if (admin.login(password)) {
+        successMsg.textContent = "✅ Login successful! Redirecting...";
+        successMsg.style.display = "block";
+        setTimeout(() => {
+          window.location.href = "admin-dashboard.html";
+        }, 1000);
+      } else {
+        errorMsg.textContent = "❌ Incorrect password. Try again.";
+        errorMsg.style.display = "block";
+        document.getElementById("password").value = "";
+        document.getElementById("password").focus();
+      }
+    });
+
+    // Focus password input on load
+    window.addEventListener("load", () => {
+      document.getElementById("password").focus();
+    });
+  </script>
+</body>
+</html>
