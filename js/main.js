@@ -9,16 +9,25 @@ class App {
 
   // Load custom menu items from localStorage (added via admin)
   loadMenuFromStorage() {
-    const stored = localStorage.getItem("adminMenuItems");
-    if (stored) {
-      try {
-        CONFIG.menu = JSON.parse(stored);
-      } catch (e) {
-        console.warn("Failed to parse stored menu items, using defaults");
+  const stored = localStorage.getItem("adminMenuItems");
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      // Only use stored menu if items have images (not stale old data)
+      const firstCategory = Object.values(parsed)[0] || [];
+      if (firstCategory.length > 0 && firstCategory[0].image) {
+        CONFIG.menu = parsed;
+      } else {
+        // Stale data — clear it and use fresh config
+        localStorage.removeItem("adminMenuItems");
       }
+    } catch (e) {
+      console.warn("Failed to parse stored menu items, using defaults");
+      localStorage.removeItem("adminMenuItems");
     }
   }
-
+}
+  
   init() {
     this.renderMenu();
     this.attachEventListeners();
