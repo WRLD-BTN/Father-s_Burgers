@@ -1,24 +1,45 @@
 /* Admin Authentication & State Management */
 
+/* Admin Authentication & State Management */
+
 class AdminManager {
   constructor() {
     this.isAuthenticated = this.checkAuth();
-    this.password = "Revelations2026"; // Secure this in production!
+
+    // SHA-256 hash of: Revelations2026
+    this.passwordHash =
+      "7a20304df2e81e2e490486f9101a178287c979b23b698de250089265aedc3b17";
   }
 
   // Check if admin is logged in
   checkAuth() {
-    const auth = sessionStorage.getItem("adminAuth");
-    return auth === "true";
+    return sessionStorage.getItem("adminAuth") === "true";
+  }
+
+  // SHA-256 hashing function
+  async hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    return hashArray
+      .map(byte => byte.toString(16).padStart(2, "0"))
+      .join("");
   }
 
   // Admin login
-  login(password) {
-    if (password === this.password) {
+  async login(password) {
+    const enteredHash = await this.hashPassword(password);
+
+    if (enteredHash === this.passwordHash) {
       sessionStorage.setItem("adminAuth", "true");
       this.isAuthenticated = true;
       return true;
     }
+
     return false;
   }
 
