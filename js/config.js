@@ -19,7 +19,7 @@ const CONFIG = {
     ],
     "Sides": [
       { id: 11, name: "French Fries", desc: "Crispy & golden", price: 2.49, icon: "🍟", image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop&auto=format" },
-      { id: 12, name: "Onion Rings", desc: "Battered & deep fried", price: 2.99, icon: "🧅", image: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&h=300&fit=crop&auto=format" },
+      { id: 12, name: "Onion Rings", desc: "Battered & deep fried", price: 2.99, image: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&h=300&fit=crop&auto=format" },
       { id: 13, name: "Coleslaw", desc: "Fresh cabbage salad", price: 1.99, icon: "🥗", image: "https://images.unsplash.com/photo-1621508638997-e30808c10653?w=400&h=300&fit=crop&auto=format" },
       { id: 14, name: "Fried Chicken Wings", desc: "6 pieces, honey garlic", price: 5.99, icon: "🍗", image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400&h=300&fit=crop&auto=format" },
     ],
