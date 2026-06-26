@@ -132,16 +132,39 @@
   <script>
     // Gallery data - easily scalable
     const galleryItems = [
-      { name: "Classic Burger", icon: "🍔" },
-      { name: "Cheese Burger", icon: "🧀" },
-      { name: "Bacon Burger", icon: "🥓" },
-      { name: "Spicy Burger", icon: "🌶️" },
-      { name: "Double Deluxe", icon: "🍔" },
-      { name: "French Fries", icon: "🍟" },
-      { name: "Onion Rings", icon: "🧅" },
-      { name: "Chicken Wings", icon: "🍗" },
-    ];
-
+  {
+    name: "Classic Burger",
+    image: "https://source.unsplash.com/600x600/?classic,burger"
+  },
+  {
+    name: "Cheese Burger",
+    image: "https://source.unsplash.com/600x600/?cheeseburger"
+  },
+  {
+    name: "Bacon Burger",
+    image: "https://source.unsplash.com/600x600/?bacon,burger"
+  },
+  {
+    name: "Spicy Burger",
+    image: "https://source.unsplash.com/600x600/?spicy,burger"
+  },
+  {
+    name: "Double Deluxe",
+    image: "https://source.unsplash.com/600x600/?double,burger"
+  },
+  {
+    name: "French Fries",
+    image: "https://source.unsplash.com/600x600/?french,fries"
+  },
+  {
+    name: "Onion Rings",
+    image: "https://source.unsplash.com/600x600/?onion,rings"
+  },
+  {
+    name: "Chicken Wings",
+    image: "https://source.unsplash.com/600x600/?chicken,wings"
+  },
+];
     let currentImageIndex = 0;
 
     // Render gallery
@@ -149,7 +172,7 @@
       const grid = document.getElementById("galleryGrid");
       grid.innerHTML = galleryItems.map((item, idx) => `
         <div class="gallery-item" onclick="openLightbox(${idx})">
-          ${item.icon}
+          <img src="${item.image}" alt="${item.name}" />
         </div>
       `).join("");
     }
